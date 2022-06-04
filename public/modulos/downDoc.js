@@ -1,7 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
 import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js"
-import * as fs from 'node:fs';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -19,9 +18,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-app.use(cors())
-
-
 // Initialize Firestore
 const db = getFirestore(app);
 
@@ -33,6 +29,11 @@ export async function guardarDoc(ruta) {
     if(docSnap.exists()){
         console.log('Document data: ', JSON.stringify(docSnap.data()))
 
+        var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(docSnap.data()));
+        var dlAnchorElem = document.getElementById('downloadAnchorElem');
+        dlAnchorElem.setAttribute("href",     dataStr     );
+        dlAnchorElem.setAttribute("download", `${docSnap.id}.json`);
+        dlAnchorElem.click();
         
     } else {
         console.log("No such document!");
