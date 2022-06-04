@@ -1,4 +1,6 @@
 import { guardarDoc } from './modulos/downDoc.js'
+import { guardarColl } from './modulos/downColl.js'
 
 
-guardarDoc('CLIENTES , EricP:20666')
+// guardarDoc()
+guardarColl()
