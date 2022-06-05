@@ -27,9 +27,6 @@ export async function guardarColl(coleccion) {
 
     let finalCollection = pulirCollection(querySnapshot);
 
-    console.log(querySnapshot)
-    //delete querySnapshot.metadata
-    console.log(querySnapshot)
     console.log(finalCollection)
 
     var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(finalCollection));
