@@ -21,16 +21,34 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firestore
 const db = getFirestore(app);
 
-export async function guardarColl() {
+export async function guardarColl(coleccion) {
 
-    const querySnapshot  = await getDocs(collection(db, 'CLIENTES'));
+    const querySnapshot  = await getDocs(collection(db, coleccion));
+
+    let finalCollection = pulirCollection(querySnapshot);
 
     console.log(querySnapshot)
+    //delete querySnapshot.metadata
+    console.log(querySnapshot)
+    console.log(finalCollection)
 
-    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(querySnapshot));
+    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(finalCollection));
     var dlAnchorElem = document.getElementById('downloadAnchorElem');
     dlAnchorElem.setAttribute("href",     dataStr     );
     dlAnchorElem.setAttribute("download", `${querySnapshot.query.id}.json`);
     dlAnchorElem.click();
 
+}
+
+function pulirCollection (querySnapshot) {
+
+    let finalCollection = [];
+
+    querySnapshot.forEach(doc => {
+
+        finalCollection.push({id: doc.id, data: doc.data()})
+
+    });
+
+    return finalCollection;
 }
