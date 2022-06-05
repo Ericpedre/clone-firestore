@@ -10,5 +10,7 @@ import { guardarColl } from './modulos/downColl.js'
 
 // descomenta esta linea para descargar una coleccion entera
 // CUIDADO: PUEDE TRAER MUCHOS DOCUMENTOS AL EJECUTARSE
+
 // guardarColl("clientes");
+
 // solo funciona con las colecciones de la raiz
