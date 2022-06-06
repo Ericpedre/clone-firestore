@@ -1,11 +1,6 @@
 // import { guardarDoc } from './modulos/downDoc.js'
-import { guardarColl } from './modulos/downColl.js'
-
-
-// guardarDoc()
-
-
-
+// import { guardarColl } from './modulos/downColl.js'
+import { crearDoc } from './modulos/upColl.js'
 
 
 // descomenta esta linea para descargar una coleccion entera
@@ -14,3 +9,8 @@ import { guardarColl } from './modulos/downColl.js'
 // guardarColl("clientes");
 
 // solo funciona con las colecciones de la raiz
+
+
+
+
+crearDoc('file-in')
