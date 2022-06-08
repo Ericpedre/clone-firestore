@@ -12,8 +12,6 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firestore
 const db = getFirestore(app);
 
-console.log(db)
-
 export async function guardarColl(coleccion) {
 
     // btn 
