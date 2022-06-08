@@ -4,15 +4,7 @@ import { getFirestore, collection, getDocs } from "https://www.gstatic.com/fireb
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyDswkNyh3K8gSHprFxMPh8yYIUHKKoVM48",
-    authDomain: "strongdog-project.firebaseapp.com",
-    projectId: "strongdog-project",
-    storageBucket: "strongdog-project.appspot.com",
-    messagingSenderId: "636171274219",
-    appId: "1:636171274219:web:6b70f0aa188c5cb51a3bae"
-  };
+import { firebaseConfig } from './firebaseConfig.js';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -20,20 +12,27 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firestore
 const db = getFirestore(app);
 
+console.log(db)
+
 export async function guardarColl(coleccion) {
 
-    const querySnapshot  = await getDocs(collection(db, coleccion));
+    // btn 
+    let downBtn = document.getElementById("down-btn");
+    downBtn.innerHTML = `Descargar datos de ${app._options.projectId}`;
 
-    let finalCollection = pulirCollection(querySnapshot);
+    downBtn.addEventListener('click', async function () {
+        const querySnapshot  = await getDocs(collection(db, coleccion));
 
-    console.log(finalCollection)
-
-    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(finalCollection));
-    var dlAnchorElem = document.getElementById('downloadAnchorElem');
-    dlAnchorElem.setAttribute("href",     dataStr     );
-    dlAnchorElem.setAttribute("download", `${querySnapshot.query.id}.json`);
-    // dlAnchorElem.click();
-
+        let finalCollection = pulirCollection(querySnapshot);
+    
+        console.log(finalCollection)
+    
+        var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(finalCollection));
+        var dlAnchorElem = document.getElementById('downloadAnchorElem');
+        dlAnchorElem.setAttribute("href",     dataStr     );
+        dlAnchorElem.setAttribute("download", `${querySnapshot.query.id}.json`);
+        dlAnchorElem.click();  
+    })
 }
 
 function pulirCollection (querySnapshot) {

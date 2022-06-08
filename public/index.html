@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
     <title>Clone Firestore</title>
 </head>
-<body>
-    <a id="downloadAnchorElem" style="display:none"></a>
-    <input type="file" name="json" id="file-in">
-    
+<body class="d-flex p-2 container flex-column" style="margin-top: 50px">
+    <div class="container d-flex p-2 flex-column">
+        <input class="form-control" type="file" name="json" id="file-in">
+        <br>
+        <button id="down-btn" class="btn btn btn-outline-primary" type="button">Nada para descargar</button>
+        <a id="downloadAnchorElem" style="display:none"></a>
+    </div>
     <script type="module" src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
