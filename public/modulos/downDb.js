@@ -36,6 +36,7 @@ function splitSubCollections(element) {
 export function guardarColl(collections) {
 
     let downBtn = document.getElementById('down-btn')
+    downBtn.innerHTML = `Descargar datos de ${app._options.projectId}`;
 
     downBtn.addEventListener('click', async function () {
         let finalDb = await Promise.all(collections.map(async function (element) {

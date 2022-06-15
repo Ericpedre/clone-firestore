@@ -12,7 +12,7 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firestore
 const db = getFirestore(app);
 
-export function crearDoc(inputId){
+export function upDb(inputId){
     let input = document.getElementById(inputId);
 
     input.addEventListener('change', async function () {
@@ -22,17 +22,28 @@ export function crearDoc(inputId){
         
         console.log(json)
         
-        // escribirDoc(json)
+        writeDb(json)
         
     })
 
 }
 
-async function escribirDoc(json) {
+async function writeDb(json) {
 
-    json.forEach(document => {
-        console.log(document.data);
-        setDoc(doc(db, "clientes", `${document.id}`), document.data);
+    json.forEach(collection => {
+        collection.docs.forEach(document => {
+            console.log('"Witing..."')
+            setDoc(doc(db, collection.name, `${document.id}`), document.data);
+            if(document.subCollections){
+                console.log("has subCollections")
+                document.subCollections.forEach(subCollection => {
+                    subCollection.docs.forEach(document2 => {
+                        setDoc(doc(db, collection.name, `${document.id}`, `${subCollection.name}`, `${document2.id}`), document2.data);
+                    })
+                })
+            } else {
+                console.log("no has subCollections")
+            }
+        })
     });
-    
 }
